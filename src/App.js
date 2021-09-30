@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {getEvents, getGuides, getOrders} from "./redux/actions";
+import React, {useEffect} from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Main from "./components/user/Main/Main";
+import CreateEvent from "./components/admin/events/CreateEvent";
+import EditEvent from "./components/admin/events/EditEvent";
+import GuideCreate from "./components/admin/guides/GuideCreate";
+import GuideEdit from "./components/admin/guides/GuideEdit";
+import ClientHook from "./components/user/client-hook/ClientHook";
+import AdminPanel from "./components/admin/AdminPanel";
+import OrderPage from "./components/admin/orders/OrderPage";
+import OrderCreate from "./components/admin/orders/order-create/OrderCreate";
+import GuidePage from "./components/user/guides-for-user/GuidePage";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getEvents());
+        dispatch(getGuides());
+        dispatch(getOrders());
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    return (
+        <Router>
+            <Switch>
+                <Route path="/" exact component={Main}/>
+                <Route path="/event/:id" component={ClientHook}/>
+                <Route path="/create_event/" component={CreateEvent}/>
+                <Route path="/edit_event/:id" component={EditEvent}/>
+                <Route path="/guides/:id" component={GuidePage}/>
+                <Route path="/create_guide" component={GuideCreate}/>
+                <Route path="/edit_guide/:id" component={GuideEdit}/>
+                <Route path="/orders/:id" component={OrderPage}/>
+                <Route path="/create_order/" component={OrderCreate}/>
+                <Route path="/admin" component={AdminPanel}/>
+            </Switch>
+                <p className="m-1 text-center"> Guides Site. Made by Mikhail Lapshin. ©All rights reserved 2021</p>
+        </Router>
+    );
 }
 
 export default App;
