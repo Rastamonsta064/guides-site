@@ -2,6 +2,7 @@ export const SET_EVENTS = "SET_EVENTS";
 export const SET_GUIDES = "SET_GUIDES";
 export const DELL_EVENT = "DELL_EVENT";
 export const SET_ORDERS = "SET_ORDERS";
+const url = "https://guides-site-server.herokuapp.com/";
 
 //   ----------------EVENTS----------------------
 
@@ -12,7 +13,7 @@ export const setEvents = (eventsArr) => ({
 
 export const getEvents = () => {
     return (dispatch) => {
-        fetch("http://localhost:5000/events/", {method: "GET"})
+        fetch(url +"events/", {method: "GET"})
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -33,7 +34,7 @@ export const deleteEvent = (id) => ({
 
 export const dellEvent = (id) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/events/" + id, {method: "DELETE"})
+        fetch(url + "events/" + id, {method: "DELETE"})
             .then(response => {
                 if (response.ok) {
                     dispatch(deleteEvent(id));
@@ -47,7 +48,7 @@ export const dellEvent = (id) => {
 
 export const createEvent = (newEvent) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/events/add", {
+        fetch(url + "events/add", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -68,7 +69,7 @@ export const createEvent = (newEvent) => {
 
 export const updateEvent = (id, updatedEvent) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/events/update/" + id, {
+        fetch(url + "events/update/" + id, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -89,7 +90,7 @@ export const updateEvent = (id, updatedEvent) => {
 
 export const updateEventRegistered = (id, updatedEventReg) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/events/patch_registered/" + id, {
+        fetch(url + "events/patch_registered/" + id, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -118,7 +119,7 @@ export const setGuides = (guidesArr) => ({
 
 export const getGuides = () => {
     return (dispatch) => {
-        fetch("http://localhost:5000/guides/", {method: "GET"})
+        fetch(url + "guides/", {method: "GET"})
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -133,7 +134,7 @@ export const getGuides = () => {
 
 export const createGuide = (newGuide) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/guides/add", {
+        fetch(url+"guides/add", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -155,7 +156,7 @@ export const createGuide = (newGuide) => {
 export const updateGuide = (id, updatedGuide) => {
     return (dispatch) => {
 
-        fetch("http://localhost:5000/guides/update/" + id, {
+        fetch(url+"guides/update/" + id, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -177,7 +178,7 @@ export const updateGuide = (id, updatedGuide) => {
 
 export const deleteGuide = (id) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/guides/" + id, {method: "DELETE"})
+        fetch(url+"guides/" + id, {method: "DELETE"})
             .then(response => {
                 if (response.ok) {
                     dispatch(getGuides());
@@ -198,7 +199,7 @@ export const setOrders = (ordersArr) => ({
 
 export const getOrders = () => {
     return (dispatch) => {
-        fetch("http://localhost:5000/orders/", {method: "GET"})
+        fetch(url+"orders/", {method: "GET"})
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -213,7 +214,7 @@ export const getOrders = () => {
 
 export const addOrder = (order) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/orders/add", {
+        fetch(url+"orders/add", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -234,10 +235,10 @@ export const addOrder = (order) => {
 
 export const dellOrder = (id, eventId, orderQuantity) => {
     return (dispatch) => {
-        fetch("http://localhost:5000/orders/" + id, {method: "DELETE"})
+        fetch(url+"orders/" + id, {method: "DELETE"})
             .then(response => {
                 if (response.ok) {
-                    fetch("http://localhost:5000/events/" + eventId,{method: "GET"})
+                    fetch(url +"events/" + eventId,{method: "GET"})
                         .then(response => {
                             if (response.ok) {
                                 return response.json();
