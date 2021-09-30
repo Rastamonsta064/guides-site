@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {HashRouter as Router, Switch, Route} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {getEvents, getGuides, getOrders} from "./redux/actions";
 import React, {useEffect} from "react";
@@ -37,6 +37,7 @@ function App() {
                 <Route path="/orders/:id" component={OrderPage}/>
                 <Route path="/create_order/" component={OrderCreate}/>
                 <Route path="/admin" component={AdminPanel}/>
+                <Route path="*" component={() => <h2 className="text-center">404 NOT FOUND</h2>}/>
             </Switch>
                 <p className="m-1 text-center"> Guides Site. Made by Mikhail Lapshin. ©All rights reserved 2021</p>
         </Router>
