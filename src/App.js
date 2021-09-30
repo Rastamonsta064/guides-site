@@ -1,4 +1,4 @@
-import {HashRouter as Router, Switch, Route} from "react-router-dom";
+import {HashRouter, Switch, Route} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {getEvents, getGuides, getOrders} from "./redux/actions";
 import React, {useEffect} from "react";
@@ -25,7 +25,7 @@ function App() {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Router>
+        <HashRouter>
             <Switch>
                 <Route path="/" exact component={Main}/>
                 <Route path="/event/:id" component={ClientHook}/>
@@ -40,7 +40,7 @@ function App() {
                 <Route path="*" component={() => <h2 className="text-center">404 NOT FOUND</h2>}/>
             </Switch>
                 <p className="m-1 text-center"> Guides Site. Made by Mikhail Lapshin. ©All rights reserved 2021</p>
-        </Router>
+        </HashRouter>
     );
 }
 
